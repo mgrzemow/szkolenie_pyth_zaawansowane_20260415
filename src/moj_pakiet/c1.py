@@ -41,3 +41,4 @@ if __name__ == '__main__':
         print('Trójkąt jest prostokątny.' if prostokatny else 'Trójkąt nie jest prostokątny.')
         print('Trójkąt jest równoramienny.' if rownoramienny else 'Trójkąt nie jest równoramienny.')
         print('Trójkąt jest równoboczny.' if rownoboczny else 'Trójkąt nie jest równoboczny.')
+        print('----------------------')
