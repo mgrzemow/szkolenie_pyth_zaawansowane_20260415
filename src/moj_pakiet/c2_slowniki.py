@@ -46,3 +46,32 @@ Podpowiedzi:
  - co by było gdyby mógł wystąpić towar o różnych jednostkach miary.
 
 """
+
+from pathlib import Path
+from pprint import pprint
+
+
+RESOURCE_FILE = Path(__file__).resolve().parents[2] / "resources" / "towary.txt"
+
+
+if __name__ == "__main__":
+    slownik_rekordow = {}
+    with RESOURCE_FILE.open("rt", encoding="utf8") as f:
+        for linia in f:
+            if linia.strip() and not linia.strip().startswith("#"):
+                towar, ilosc, jm, cena, *_ = linia.split()
+                ilosc, cena = float(ilosc.strip("'")), float(cena.strip("'"))
+                if (towar, jm) in slownik_rekordow:
+                    ilosc += slownik_rekordow[(towar, jm)][0]
+                slownik_rekordow[(towar, jm)] = (ilosc, cena)
+    pprint(slownik_rekordow)
+
+    paragon = ""
+    suma = 0
+    for (towar, jm), (ilosc, cena) in slownik_rekordow.items():
+        wartosc = round(ilosc * cena, 2)
+        suma = round(suma + wartosc, 2)
+        paragon += f"{towar:12} {ilosc:5.2f} {jm:4} x {cena:6.2f} {wartosc:8.2f}\n"
+    paragon += "-" * 41 + "\n"
+    paragon += f"SUMA: {suma:35.2f}\n"
+    print(paragon)

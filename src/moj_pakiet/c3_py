@@ -1,0 +1,16 @@
+"""
+Ćwiczenie:
+
+1. Wczytujemy adresy email z podanego pliku tekstowego emails.txt
+2. Pogrupować adresy email po domenach, jedncześnie pozbywając się duplikatów. Proponuję format:
+{
+'gmail.com': {'ala@gmail.com', 'ela@gmail.com'}
+...
+}
+3. Zapisujemy adresy email do plików o nazwie pochodzącej od nazwy domeny,
+   wg schematu:
+   np wszystkie adresy @gmail.com mają zostać zapisane w pliku gmail.com.txt
+
+Podpowiedzi:
+ - nazwę domeny można wyciąć z adresu znajdując znak @
+"""
