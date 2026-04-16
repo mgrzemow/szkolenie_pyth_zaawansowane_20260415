@@ -47,19 +47,18 @@ Podpowiedzi:
 
 """
 
+from pathlib import Path
+from pprint import pprint
 import collections
+import typing
 
 
 class MojeTuple(tuple):
-    def __iadd__(self, other):
+    def __iadd__(self, other: typing.Sequence | MojeTuple) -> MojeTuple:
         if len(self) == 0:
-            return other
+            return MojeTuple(other)
         else:
-            return (self[0] + other[0], *other[1:])
-
-
-from pathlib import Path
-from pprint import pprint
+            return MojeTuple((self[0] + other[0], *other[1:]))
 
 
 RESOURCE_FILE = Path(__file__).resolve().parents[2] / "resources" / "towary.txt"

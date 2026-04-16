@@ -15,22 +15,20 @@ Podpowiedzi:
  - nazwę domeny można wyciąć z adresu znajdując znak @
 """
 
+import collections
 from pathlib import Path
 from pprint import pprint
-
 
 RESOURCE_FILE = Path(__file__).resolve().parents[2] / "resources" / "emaile.txt"
 
 
 if __name__ == "__main__":
-    slownik_rekordow = {}
+    slownik_rekordow = collections.defaultdict(set)
     with RESOURCE_FILE.open("rt", encoding="utf8") as f:
         for linia in f:
             linia = linia.lower().strip()
             if "@" in linia:
                 _, domena = linia.split("@")
-                if domena not in slownik_rekordow:
-                    slownik_rekordow[domena] = set()
                 slownik_rekordow[domena].add(linia)
     for domena, emaile in slownik_rekordow.items():
         with (RESOURCE_FILE.parent / f"{domena}.txt").open("wt", encoding="utf8") as f:
