@@ -1,18 +1,9 @@
+import functools
 
-# dekorator bez parametrów
-def dekorator(f_oryginalna):
-    def f_nowa(*args, **kwargs):
-        print('przed wywołaniem f_originalna')
-        w = f_oryginalna(*args, **kwargs)
-        print('po wywołaniu f_originalna')
-        return w
-    print('dekoruję', f_oryginalna)
-    return f_nowa
 
-# dekorator z parametrami
-
-def dekorator_2(p1, p2):
+def dekorator(p1, p2):
     def dekorator_wlasciwy(f_oryginalna):
+        @functools.wraps(f_oryginalna)
         def f_nowa(*args, **kwargs):
             print('przed wywołaniem f_originalna', p1, p2)
             w = f_oryginalna(*args, **kwargs)
@@ -22,7 +13,7 @@ def dekorator_2(p1, p2):
         return f_nowa
     return dekorator_wlasciwy
 
-@dekorator_2(12, 33)
+@dekorator(12, 33)
 def f1():
     print('f1')
     return 55
