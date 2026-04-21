@@ -1,0 +1,87 @@
+import collections
+
+
+# jeżeli potrzebuję żeby deskryptor miał stan to nie wystarczy property
+class MojDeskryptor:
+    def __init__(self, atr_name=None) -> None:
+        print("__init__", atr_name)
+        self._atr_name = atr_name
+
+    # wywołuje się jeżeli użyję deskrypotora w klasie i przekaże do deskryptora nazwe atrybutu
+    def __set_name__(self, owner, name):
+        if not self._atr_name:
+            self._atr_name = name
+        print("__set_name__", name)
+        self._atr_name = "_" + name
+
+    def __get__(self, instance, owner):
+        print("__get__", self, instance, owner)
+        return getattr(instance, self._atr_name)
+
+    def __set__(self, instance, value):
+        setattr(instance, self._atr_name, value)
+        print("__set__", self, instance, value)
+
+    # def __delete__(self, instance):
+    #     pass
+
+
+class DeskryptorZliczajacy:
+    def __init__(self, atr_name=None) -> None:
+        self._atr_name = atr_name
+        self._licznik_zapisow = collections.defaultdict(int)
+        self._licznik_odczytow = collections.defaultdict(int)
+
+    # wywołuje się jeżeli użyję deskrypotora w klasie i przekaże do deskryptora nazwe atrybutu
+    def __set_name__(self, owner, name):
+        if not self._atr_name:
+            self._atr_name = name
+        self._atr_name = "_" + name
+
+    def __get__(self, instance, owner):
+        if instance is not None:
+            self._licznik_odczytow[id(instance)] += 1
+            print("odczytow: ", self._licznik_odczytow)
+            return getattr(instance, self._atr_name)
+        else:
+            return self
+
+    def __set__(self, instance, value):
+        setattr(instance, self._atr_name, value)
+        self._licznik_zapisow[id(instance)] += 1
+        print("oczytow: ", self._licznik_zapisow)
+
+    def get_read_count(self, instance):
+        return self._licznik_odczytow[id(instance)]
+
+    def get_write_count(self, instance):
+        return self._licznik_zapisow[id(instance)]
+
+
+class A:
+    atr1 = DeskryptorZliczajacy()
+
+    def __init__(self, atr1) -> None:
+        self.atr1 = atr1
+
+
+# napisać deskryptor zliczający odcczyty i zapisy
+# przy każdym zapisie i odczycie wypisać stan licznika
+
+
+if __name__ == "__main__":
+    a = A(123)
+    a.atr1 = 234
+    a.atr1 = 345
+    a.atr1 = 456
+    print(a.atr1)
+    print(a.atr1)
+    print("-------------")
+    a1 = A(123)
+    a1.atr1 = 234
+    a1.atr1 = 345
+    a1.atr1 = 456
+    print(a1.atr1)
+    print(a1.atr1)
+    print(A.atr1.get_read_count(a))
+    print(A.atr1.get_read_count(a1))

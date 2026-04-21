@@ -1,40 +1,24 @@
-from math import sqrt
-sqrt(12)
-import requests
+import functools
 
-import math
-math.sqrt
-x = min([1, 2, 3])
-x = 'mama'
+class A:
+    @property
+    def atr1(self):
+        if not hasattr(self, '_atr1'):
+            print('wyliczam')
+            self._atr1 = 66
+            return 66
+        else:
+            return self._atr1
 
-print(type(x))
-print(x)
 
+class A:
+    @property
+    @functools.lru_cache()
+    def atr1(self):
+        print('wyliczam')
+        return 66
 
-
-# min = 12
-# max = 22
-# sum = 12
-# len = 12
-# sqrt = 1231
-# x = min([1,2,3])
-
-# nazwa_zmiennej = 12
-
-if 2 == 2:
-    print(12)
-    if 2 == 2:
-        print(12)
-        print(12)
-        print(12)
-        print(12)
-        print(12)
-    print(12)
-
-if 3 == 3:
-    print(12)
-
-x = 6
-print(x)
-
-import moj_pakiet.c1
+a = A()
+print(a.atr1)
+# a.atr1 = 11
+print(a.atr1)

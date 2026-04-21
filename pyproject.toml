@@ -8,6 +8,14 @@ version = "0.1.0"
 description = "Przykladowy projekt Python w ukladzie src."
 requires-python = ">=3.14"
 
+[project.optional-dependencies]
+test = [
+    "pytest>=9.0",
+    "pytest-cov>=7.0",
+    "pytest-html>=4.2",
+    "pytest-mock>=3.15",
+]
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 
@@ -17,3 +25,14 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+
+[tool.coverage.run]
+branch = true
+source = ["moj_pakiet"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+exclude_also = [
+    "if __name__ == .__main__.:",
+]
