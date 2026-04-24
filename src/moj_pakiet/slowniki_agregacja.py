@@ -1,3 +1,38 @@
+"""
+Demonstracja agregacji danych w slownikach na kilka roznych sposobow.
+
+Intencja tego modulu jest porownanie kilku wariantow rozwiazywania
+tego samego problemu: zliczania wystapien elementow oraz grupowania
+ich wedlug wspolnego klucza. Material jest celowo powtorzeniowy, bo
+pokazuje nie jeden "jedyny sluszny" zapis, ale kilka idiomow Pythona,
+ktore warto rozpoznawac i umiec porownac.
+
+W pierwszej czesci plik pokazuje zliczanie slow:
+
+- przez jawne sprawdzanie `if key not in dict`,
+- przez `dict.get`,
+- przez `collections.defaultdict`.
+
+W drugiej czesci ten sam styl porownania zostaje zastosowany do
+grupowania slow po pierwszej literze:
+
+- wariant reczny,
+- wariant z `get`,
+- wariant z `setdefault`,
+- wariant z `defaultdict(list)`.
+
+Najwazniejsze mechanizmy i skladnia to:
+
+- slowniki jako struktura agregujaca,
+- metoda `split()` jako zrodlo danych tekstowych,
+- `dict.get`, `dict.setdefault` i `defaultdict`,
+- adnotacje typow `Mapping[str, int]` oraz `Mapping[str, list[str]]`,
+- petla `for` aktualizujaca akumulator.
+
+To dobry modul do rozmowy o czytelnosci kodu, kosztach poznawczych
+roznych idiomow i wyborze stylu odpowiedniego do skali problemu.
+"""
+
 import collections
 from collections.abc import Mapping
 

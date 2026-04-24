@@ -1,3 +1,35 @@
+"""
+Demonstracja wlasnych deskryptorow w Pythonie.
+
+Plik pokazuje krok dalej niz `property`: zamiast korzystac z gotowego
+deskryptora wbudowanego, definiujemy wlasne klasy implementujace
+metody specjalne `__get__`, `__set__` oraz `__set_name__`.
+
+Pierwszy deskryptor `MojDeskryptor` sluzy do pokazania podstawowego
+przeplywu sterowania:
+
+- deskryptor dostaje nazwe atrybutu przez `__set_name__`,
+- przy odczycie wywolywane jest `__get__`,
+- przy zapisie wywolywane jest `__set__`.
+
+Drugi deskryptor `DeskryptorZliczajacy` rozwija ten pomysl i pokazuje,
+ze deskryptor moze utrzymywac wlasny stan wspoldzielony pomiedzy
+instancjami klasy uzywajacej deskryptora. W tym przypadku stanem sa
+liczniki odczytow i zapisow przechowywane w `defaultdict(int)`.
+
+Najwazniejsze mechanizmy i skladnia to:
+
+- klasy z metodami specjalnymi protokolu deskryptora,
+- `collections.defaultdict` jako magazyn licznikow,
+- rozroznienie dostepu przez instancje i przez klase,
+- automatyczne podstawienie deskryptora do klasy jako atrybutu,
+- odczyt stanu deskryptora przez `A.atr1`, a nie przez `a.atr1`.
+
+To modul pokazowy dla sytuacji, w ktorych samo `property` nie wystarcza,
+bo potrzebne jest bardziej ogolne, wielokrotnego uzycia narzedzie
+kontrolujace dostep do atrybutow.
+"""
+
 import collections
 
 

@@ -1,10 +1,33 @@
+# Virtual environments
 venv/
 .venv/
+
+# Python caches
 __pycache__/
+*.py[cod]
 .pytest_cache/
+pytest-cache-files-*/
+
+# Coverage and test reports
 .coverage
+.coverage.*
+coverage_data/
 htmlcov/
+reports/coverage/*
+!reports/coverage/.gitignore
+reports/.coverage
+reports/.coverage.*
+reports/coverage-data
+reports/coverage-data.*
+reports/pdoc/*
+!reports/pdoc/.gitignore
+reports/pytest/*
+!reports/pytest/.gitignore
+
+# Build artifacts
 build/
 dist/
 *.egg-info/
-pytest-cache-files-*/
+
+# Local runtime files
+*.log

@@ -9,8 +9,31 @@ się do pokazania:
 """
 
 
+def _sprawdz_argumenty(rok, miesiac, dzien, nr, plec_facet):
+    """Waliduje podstawowe argumenty wejściowe uproszczonego generatora PESEL."""
+    if type(rok) is not int:
+        raise TypeError("rok musi być liczbą całkowitą")
+    if type(miesiac) is not int:
+        raise TypeError("miesiac musi być liczbą całkowitą")
+    if type(dzien) is not int:
+        raise TypeError("dzien musi być liczbą całkowitą")
+    if type(nr) is not int:
+        raise TypeError("nr musi być liczbą całkowitą")
+    if type(plec_facet) is not bool:
+        raise TypeError("plec_facet musi być wartością bool")
+
+    if not 1 <= miesiac <= 12:
+        raise ValueError("miesiac musi być z zakresu 1..12")
+    if not 1 <= dzien <= 31:
+        raise ValueError("dzien musi być z zakresu 1..31")
+    if not 0 <= nr <= 999:
+        raise ValueError("nr musi być z zakresu 0..999")
+
+
 def rob_pesel(rok, miesiac, dzien, nr, plec_facet):
     """Buduje uproszczony numer PESEL na podstawie przekazanych danych."""
+    _sprawdz_argumenty(rok, miesiac, dzien, nr, plec_facet)
+
     # Dla osób urodzonych od 2000 roku miesiąc jest zapisany z przesunięciem o 20.
     miesiac_w_peselu = miesiac + 20 if rok >= 2000 else miesiac
 

@@ -35,6 +35,7 @@ Dokumentacja Python:
 """
 
 
-import moj_pakiet.importowany
+if __name__ == "__main__":
+    import moj_pakiet.importowany
 
-moj_pakiet.importowany.f1()
+    moj_pakiet.importowany.f1()

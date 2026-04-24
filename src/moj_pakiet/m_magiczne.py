@@ -1,3 +1,35 @@
+"""
+Demonstracja metod specjalnych, zwanych potocznie metodami magicznymi.
+
+Plik wykorzystuje klase `Spychacz` jako prosty model obiektu, na ktorym
+mozna pokazywac, jak Python wywoluje specjalne metody w odpowiedzi
+na skladnie i operacje wykonywane przez uzytkownika.
+
+W module pojawiaja sie miedzy innymi:
+
+- `__str__` i `__repr__` do tekstowej reprezentacji obiektu,
+- `__eq__` i `__lt__` do porownan,
+- `__add__` do przeciazania operatora `+`,
+- komentarze dotyczace `__hash__`, `__bool__` i `__del__`.
+
+Najwazniejsza idea jest taka, ze wiele elementow skladni Pythona nie jest
+magia zarezerwowana dla typow wbudowanych. Za operacjami takimi jak
+`print(obj)`, `obj1 < obj2`, `obj1 + obj2` albo sprawdzanie obiektu
+w instrukcji `if` stoja konkretne metody specjalne, ktore mozna
+zaimplementowac we wlasnej klasie.
+
+Przyklad pokazuje tez wazna strone praktyczna: samo istnienie metody
+specjalnej nie oznacza jeszcze, ze jej uzycie ma sens biznesowy.
+Niektore operatory mozna przeciazyc technicznie, ale projektowo nie
+zawsze jest to dobry pomysl. Dlatego plik ma charakter zarowno
+techniczny, jak i dyskusyjny.
+
+Najwazniejsze elementy skladni to definicja klasy, metody specjalne
+rozpoznawane po nazwach z podwojnymi podkresleniami, zwykle instrukcje
+warunkowe i operatory arytmetyczne oraz testy w bloku
+`if __name__ == "__main__":`.
+"""
+
 import pathlib
 
 class Spychacz:

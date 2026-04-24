@@ -1,3 +1,32 @@
+"""
+Demonstracja grupowania adresow email po domenach z uzyciem
+generatorow i `functools.reduce`.
+
+Intencja tego pliku jest pokazanie, ze klasyczne przetwarzanie danych
+z pliku mozna zapisac w stylu bardziej funkcyjnym niz przy zwyklej
+petli `for`. Wejsciem jest plik tekstowy z adresami email, a wynikiem
+slownik mapujacy nazwe domeny na zbior unikalnych adresow nalezacych
+do tej domeny.
+
+W przykladzie wykorzystane sa trzy wazne mechanizmy Pythona:
+
+- obiekty `Path` z modulu `pathlib`, zbudowane wzgledem `__file__`,
+- wyrazenia generatorowe do etapowego filtrowania i normalizacji danych,
+- `functools.reduce`, ktore sukcesywnie buduje akumulator slownikowy.
+
+Najwazniejsze elementy skladni to tutaj `with ... as ...` do pracy
+z plikiem, generator expressions w nawiasach okraglych, funkcja
+zagniezdzona `f_agg` przekazywana do `reduce` oraz adnotacje typow
+takie jak `Mapping[str, set[str]]`.
+
+Modul pokazuje tez typowy wzorzec "wczytaj -> przetworz -> zapisz":
+najpierw linie sa normalizowane, potem filtrowane, nastepnie agregowane
+po domenie, a na koncu wynik zapisywany jest do osobnych plikow
+tekstowych nazwanych od domen. To dobry przyklad porownawczy wobec
+wersji opartych o petle, `defaultdict` albo klasyczne instrukcje
+warunkowe.
+"""
+
 import collections
 from collections.abc import Mapping
 import functools

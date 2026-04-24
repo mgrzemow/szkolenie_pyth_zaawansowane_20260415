@@ -1,0 +1,38 @@
+{
+  "poprawne": [
+    {
+      "args": [2002, 11, 3, 34, true],
+      "expected": "02310303417"
+    },
+    {
+      "args": [1990, 5, 12, 67, false],
+      "expected": "90051206700"
+    },
+    {
+      "args": [2008, 10, 18, 733, true],
+      "expected": "08301873314"
+    }
+  ],
+  "bledy": [
+    {
+      "args": [2002, 13, 3, 34, true],
+      "exception": "ValueError",
+      "message": "miesiac"
+    },
+    {
+      "args": [2002, 11, 32, 34, true],
+      "exception": "ValueError",
+      "message": "dzien"
+    },
+    {
+      "args": [2002, 11, 3, 1000, true],
+      "exception": "ValueError",
+      "message": "nr"
+    },
+    {
+      "args": [2002, 11, 3, 34, "tak"],
+      "exception": "TypeError",
+      "message": "plec_facet"
+    }
+  ]
+}
